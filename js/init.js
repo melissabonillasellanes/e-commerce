@@ -4,12 +4,18 @@ const getId = () => {
   return id;
 };
 
+// Método que se obtiene la id de el producto al que se ingrese
+const getProductId = () => {
+  const id = localStorage.getItem("productID");
+  return id;
+};
+
 const EXT_TYPE = ".json";
 const CATEGORIES_URL = "https://japceibal.github.io/emercado-api/cats/cat.json";
 const PUBLISH_PRODUCT_URL = "https://japceibal.github.io/emercado-api/sell/publish.json";
 const PRODUCTS_URL = "https://japceibal.github.io/emercado-api/cats_products/" + getId() + EXT_TYPE;
-const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/";
-const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/";
+const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/" + getProductId() + EXT_TYPE;
+const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/" + getProductId() + EXT_TYPE;
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 
@@ -45,3 +51,29 @@ let getJSONData = function (url) {
       return result;
     });
 };
+
+//Local Storage
+// Guarda el dato email en el Local Storage
+const setEmail = () => {
+	localStorage.setItem("email", email.value);
+};
+
+// Obtiene el dato email de el Local Storage
+const getEmail = () => {
+	const email = localStorage.getItem("email");
+	return email;
+};
+
+// Condición
+if (document.getElementById("submit")) {
+	const btn = document.getElementById("submit");
+	btn.onclick = () => {
+	setEmail();
+	};
+} else {
+	const miperfil = document.getElementById("mi-perfil");
+	const addToHTML = () => {
+		miperfil.innerHTML = getEmail();
+	};
+	addToHTML();
+}

@@ -27,18 +27,24 @@ const BTN_LIMPIAR = document.getElementById("clearFilter");
 const SEARCH = document.getElementById("search");
 
 // Funciones:
-// Función para agregar al HTML la lista de productos manipulando el DOM
-const showProductsList = (currentArray) => {
-let htmlContentToAppend = "";
-if (currentArray.length == 0) {
-    PRODUCTS_LIST_CONTAINERR.innerHTML = "";
+// Función que registra el id del producto seleccionado en el Local Storage
+function setProductID(id) {
+    localStorage.setItem("productID", id);
+    window.location = "product-info.html";
 }
 
-currentArray.forEach((product) => {
+// Función para agregar al HTML la lista de productos manipulando el DOM
+const showProductsList = (array) => {
+let htmlContentToAppend = "";
+if (array.length == 0) {
+    PRODUCTS_LIST_CONTAINER.innerHTML = "";
+}
+
+array.forEach((product) => {
     {
     htmlContentToAppend +=
         `
-        <div  class="card list-group-item list-group-item-action">
+        <div onclick="setProductID(${product.id})" class="card list-group-item list-group-item-action">
         <div class="row">
         <div class="col-3">
         <img src="` +

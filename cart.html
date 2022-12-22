@@ -1,82 +1,247 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <title>eMercado - Todo lo que busques está aquí</title>
-    <link
-      href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
-      rel="stylesheet"/>
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/font-awesome.min.css" rel="stylesheet" />
-    <link href="css/styles.css" rel="stylesheet" />
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-      <div class="container">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav w-100 justify-content-between">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="categories.html">Categorías</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="sell.html">Vender</a>
-            </li>
-            <li class="nav-item"></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <main>
-      <div class="container">
-        <div class="alert alert-danger text-center" role="alert">
-          <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-        </div>
-      </div>
-    </main>
-    <footer class="text-muted">
-      <div class="container">
-        <p class="float-end">
-          <a href="#">Volver arriba</a>
-        </p>
-        <p>
-          Este sitio forma parte de
-          <a href="https://jovenesaprogramar.edu.uy/" target="_blank"
-            >Jovenes a Programar</a
-          >
-          - 2022
-        </p>
-        <p>
-          Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la
-          letra del obligatorio.
-        </p>
-      </div>
-    </footer>
-    <div id="spinner-wrapper">
-      <div class="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>eMercado - Todo lo que busques está aquí</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <link href="css/styles.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 justify-content-between">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categories.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sell.html">Vender</a>
+          </li>
+          <!-- Información de usuario -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" id="mi-perfil">
+            </a>
+            <!-- Menú desplegable -->
+            <ul class="dropdown-menu-dark dropdown-menu p-1">
+              <li>
+                <a class="nav-link" href="cart.html">Mi carrito
+                </a>
+              </li>
+              <li>
+                <a class="nav-link" href="my-profile.html">Mi perfil</a>
+              </li>
+              <li>
+                <a class="nav-link" href="index.html" onclick="localStorage.removeItem('email')">Cerrar sesión</a>
+              </li>
+            </ul>
+        </ul>
       </div>
     </div>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/init.js"></script>
-    <script src="js/cart.js"></script>
-  </body>
+  </nav>
+  <main>
+    <!-- Carrito de compras -->
+    <div class="container">
+      <h2 class="text-center m-3">Carrito de compras</h2>
+      <h3 class="m-3">Artículos a comprar</h3>
+      <table class="table m-3 border-bottom">
+        <tbody>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Costo</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Subtotal</th>
+          </tr>
+        </tbody>
+        <tbody id="carrito"></tbody>
+      </table>
+      <h3 class="m-3 p-2">Tipo de envío</h3>
+      <div class="d-flex flex-column m-3 p-2">
+        <div>
+          <input type="radio" name="envio" id="premium" checked required>
+          <label>Premium 2 a 5 días (15%)</label>
+        </div>
+        <div>
+          <input type="radio" name="envio" id="express" required>
+          <label>Express 5 a 8 días (7%)</label>
+        </div>
+        <div>
+          <input type="radio" name="envio" id="standard" required>
+          <label>Standard 12 a 15 días (5%)</label>
+        </div>
+      </div>
+      <h3 class="d-flex m-3 p-2">Dirección de envío</h3>
+      <form action="#" class="needs-validation" novalidate>
+        <div class="d-flex m-3 p-2">
+          <div>
+            <label for="calle" class="form-label">Calle</label>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control me-4" style="width: 28rem" required />
+              <div class="invalid-feedback">Ingresa una calle</div>
+            </div>
+          </div>
+          <div>
+            <label for="numero" class="form-label">Número</label>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" style="width: 10rem" required />
+              <div class="invalid-feedback">Ingresa un número</div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex m-3 p-2">
+          <div>
+            <label for="calle" class="form-label">Esquina</label>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control me-4" style="width: 28rem" required />
+              <div class="invalid-feedback">Ingresa una esquina</div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <h3 class="d-flex m-3 p-2">Costos</h3>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <div class="d-flex justify-content-between m-0 p-0">
+              <p class="m-0 p-0">Subtotal</p>
+              <p class="m-0 p-0 text-secondary">USD <span id="subtotal"></span></p>
+            </div>
+            <p class="m-0 p-0 text-secondary">Costo unitario del producto por cantidad</p>
+          </li>
+          <li class="list-group-item">
+            <div class="d-flex justify-content-between m-0 p-0">
+              <p class="m-0 p-0">Costo de envío</p>
+              <p class="m-0 p-0 text-secondary">USD <span id="costoenvio"></span></p>
+            </div>
+            <p class="m-0 p-0 text-secondary">Según el tipo de envío</p>
+          </li>
+          <li class="list-group-item">
+            <div class="d-flex justify-content-between m-0 p-0">
+              <p class="m-0 p-0">Total</p>
+              <p class="m-0 p-0 text-secondary"><strong>USD <span id="total"></span></strong></p>
+            </div>
+          </li>
+        </ul>
+        <hr>
+        <h3 class="d-flex m-3 p-2">Forma de pago</h3>
+        <div class="d-flex">
+          <p class="me-2">No ha seleccionado</p>
+          <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">Seleccionar</a>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Forma de pago
+                </h1>
+              </div>
+              <div class="modal-body">
+                <div class="d-flex">
+                  <input class="form-check-input me-2 p-0" type="radio" name="tipo"
+                    id="tarjeta" checked="" />
+                  <p>Tarjeta de crédito</p>
+                </div>
+                <hr />
+                <div class="d-flex">
+                  <div>
+                    <label class="form-label">Número de tarjeta</label>
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control me-4" id="numerotarjeta"
+                        style="width: 16rem" required />
+                    </div>
+                  </div>
+                  <div>
+                    <label class="form-label">Código de seg.</label>
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" id="codigotarjeta" style="width: 10rem"
+                        required />
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div>
+                    <label class="form-label">Vencimiento (MM/AA)</label>
+                    <div class="input-group mb-3">
+                      <input type="date" class="form-control me-4" id="vencimientotarjeta"
+                        style="width: 16rem" required />
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <input class="form-check-input me-2 p-0" type="radio" name="tipo"
+                    id="transferencia" />
+                  <p>Transferencia bancaria</p>
+                </div>
+                <hr />
+                <div>
+                  <label class="form-label">Número de cuenta</label>
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control me-4" id="numerocuenta"
+                      style="width: 16rem" required disabled/>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary w-100 fw-bold fs-6">Finalizar compra</button>
+      </form>
+    </div>
+  </main>
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-end">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>
+        Este sitio forma parte de
+        <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+        - 2022
+      </p>
+      <p>
+        Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la
+        letra del obligatorio.
+      </p>
+    </div>
+  </footer>
+  <!-- Alerta exitosa -->
+  <div class="alert alert-success alert-dismissible fade" role="alert" id="alert-success">
+    <p>¡Has comprado con éxito!</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+  <!-- Alerta con error -->
+  <div class="alert alert-danger alert-dismissible fade" role="alert" id="alert-danger">
+    <p>Por favor, complete todos los campos</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+  <div id="spinner-wrapper">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+
 </html>

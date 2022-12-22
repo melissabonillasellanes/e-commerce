@@ -29,6 +29,23 @@
           <li class="nav-item">
             <a class="nav-link active" href="sell.html">Vender</a>
           </li>
+          <!-- Información de usuario -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" id="mi-perfil">
+            </a>
+            <!-- Menú desplegable -->
+            <ul class="dropdown-menu-dark dropdown-menu p-1">
+              <li>
+                <a class="nav-link" href="cart.html">Mi carrito
+                </a>
+              </li>
+              <li>
+                <a class="nav-link" href="my-profile.html">Mi perfil</a>
+              </li>
+              <li>
+                <a class="nav-link" href="index.html" onclick="localStorage.removeItem('email')">Cerrar sesión</a>
+              </li>
+            </ul>
         </ul>
       </div>
     </div>
@@ -226,5 +243,4 @@
   <script src="js/init.js"></script>
   <script src="js/sell.js"></script>
 </body>
-
 </html>
